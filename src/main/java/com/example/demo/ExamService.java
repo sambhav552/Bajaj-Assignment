@@ -17,8 +17,8 @@ public class ExamService {
     @Bean
     public ApplicationRunner runAtStartup() {
         return args -> {
-            // YOUR CREDENTIALS
-            String regNo = "REG12347"; // ⚠️ Change this
+            
+            String regNo = "REG12347"; 
             String name = "Sambhav Gupta";
             String email = "sambhav@example.com";
 
@@ -40,13 +40,13 @@ public class ExamService {
             String webhook = json.getString("webhook");
             String accessToken = json.getString("accessToken");
 
-            // 2. Choose the SQL query
+            // 2. SQL Query
             int lastDigit = Integer.parseInt(regNo.replaceAll("\\D", "")) % 10;
             boolean isOdd = lastDigit % 2 != 0;
 
             String finalQuery;
             if (isOdd) {
-                // Replace with your actual query from the Google Drive question 1
+                
                 finalQuery = "SELECT p.AMOUNT AS SALARY, CONCAT(e.FIRST_NAME, ' ', e.LAST_NAME) AS NAME, " +
                         "TIMESTAMPDIFF(YEAR, e.DOB, CURDATE()) AS AGE, d.DEPARTMENT_NAME " +
                         "FROM PAYMENTS p " +
@@ -58,7 +58,7 @@ public class ExamService {
                         ") " +
                         "LIMIT 1;";
             } else {
-                // Replace with your actual query from question 2
+                
                 finalQuery = "SELECT e1.EMP_ID, e1.FIRST_NAME, e1.LAST_NAME, d.DEPARTMENT_NAME, " +
                         "COUNT(e2.EMP_ID) AS YOUNGER_EMPLOYEES_COUNT " +
                         "FROM EMPLOYEE e1 " +
@@ -68,7 +68,7 @@ public class ExamService {
                         "ORDER BY e1.EMP_ID DESC;";
             }
 
-            // 3. Submit final SQL
+            
             JSONObject submitBody = new JSONObject();
             submitBody.put("finalQuery", finalQuery);
 
